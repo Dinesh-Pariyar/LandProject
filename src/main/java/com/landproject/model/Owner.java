@@ -16,6 +16,15 @@ public class Owner {
     @OneToOne
     @JoinColumn(name = "OwnUsrId",referencedColumnName = "userId")
     private User user;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Land> landList;
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "ownerId=" + ownerId +
+                ", user=" + user +
+                ", landList=" + landList +
+                '}';
+    }
 }

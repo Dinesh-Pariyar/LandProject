@@ -17,7 +17,7 @@ public class OwnerController {
 
     @PostMapping("/owner/{userId}")
     public ResponseEntity<?> createOwner(@PathVariable Long userId){
-        return new ResponseEntity<>(ownerService.setOwner(userId), HttpStatus.OK);
+        return new ResponseEntity<>(ownerService.saveOwner(userId), HttpStatus.OK);
     }
 
     @PutMapping("/owner/{ownerId}")
@@ -28,7 +28,7 @@ public class OwnerController {
 
     @GetMapping("/owner/{ownerId}")
     public ResponseEntity<?> getOwner(@PathVariable Long ownerId){
-        return new ResponseEntity<>(ownerService.getOwner(ownerId),HttpStatus.OK);
+        return new ResponseEntity<>(ownerService.getSingleOwner(ownerId),HttpStatus.OK);
     }
 
     @GetMapping("/allOwners")

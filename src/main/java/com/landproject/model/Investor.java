@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Setter
 public class Investor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int invId;
-    @OneToOne
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long invId;
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userInvId",referencedColumnName = "userId")
     private User user;
 

@@ -6,13 +6,9 @@ import java.util.List;
 
 public interface LandService {
 
-    Land createLand(long id,Land land);
-
-    Land createLand(long id);
-
-    void deleteLand(long id);
-    Land updateLand(long id, Land land);
-    Land getLand(long id);
+    Land createLand(long ownerId,Land land);
+    String  deleteLand(long landId);
+    Land updateLand(long landId, Land land);
+    Land getLand(long landId);
     List<Land> getAllLand();
-
 }

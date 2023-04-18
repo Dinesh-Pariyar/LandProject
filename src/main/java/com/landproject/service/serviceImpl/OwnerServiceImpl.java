@@ -18,7 +18,7 @@ public class OwnerServiceImpl implements OwnerService {
     UserService userService;
 
     @Override
-    public Owner setOwner(Long userId) {
+    public Owner saveOwner(Long userId) {
         Owner owner = new Owner();
         owner.setUser(userService.getUser(userId));
         return ownerRepository.save(owner);
@@ -39,7 +39,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner getOwner(Long ownerId) {
+    public Owner getSingleOwner(Long ownerId) {
         return ownerRepository.findById(ownerId).get();
     }
 

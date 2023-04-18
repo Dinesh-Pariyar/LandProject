@@ -5,20 +5,36 @@ import com.landproject.service.LandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LandController {
     @Autowired
     LandService landService;
 
-    @PostMapping("/addLand/userId={id}")
-    public ResponseEntity<?> addLand(@PathVariable long id, @RequestBody Land land){
-        return new ResponseEntity<>(landService.createLand(id,land), HttpStatus.OK);
+    @PostMapping("/addLand/{ownerId}")
+    public ResponseEntity<?> addLand(@PathVariable long ownerId, @RequestBody Land land){
+        return new ResponseEntity<>(landService.createLand(ownerId,land), HttpStatus.OK);
+    }
 
+    @PutMapping("/land/{landId}")
+    public ResponseEntity<?> updateLand(@PathVariable long landId,@RequestBody Land land){
+        return new ResponseEntity<>(landService.updateLand(landId,land), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/land/{landId}")
+    public ResponseEntity<?> deleteLand(@PathVariable long landId){
+        return  new ResponseEntity<>(landService.deleteLand(landId),HttpStatus.OK);
+    }
+
+    @GetMapping("/land/{landId}")
+    public ResponseEntity<?> getSingleLand(@PathVariable long landId){
+        return new ResponseEntity<>(landService.getLand(landId),HttpStatus.OK);
+    }
+
+    @GetMapping("/land/getAllLand")
+    public ResponseEntity<?> getAllLand(){
+        return  new ResponseEntity<>(landService.getAllLand(),HttpStatus.OK);
     }
 
 }

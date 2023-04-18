@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
         Investor investor = new Investor();
         investor.setUser(user);
         investorRepository.save(investor);
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -34,8 +35,7 @@ public class UserServiceImpl implements UserService {
         usr.setUserName(user.getUserName());
         usr.setUserEmail(user.getUserEmail());
         usr.setUserPassword(user.getUserPassword());
-        userRepository.save(usr);
-        return usr;
+        return userRepository.save(usr);
     }
 
     @Override
