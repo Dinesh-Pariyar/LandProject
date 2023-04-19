@@ -1,5 +1,8 @@
 package com.landproject.service.serviceImpl;
 
+import com.landproject.mapper.LandMapper;
+import com.landproject.model.DTO.LandDTO;
+import com.landproject.model.DTO.OwnerDTO;
 import com.landproject.model.Land;
 import com.landproject.model.Owner;
 import com.landproject.repository.LandRepository;
@@ -12,6 +15,9 @@ import java.util.List;
 
 @Service
 public class LandServiceImpl implements LandService {
+
+    @Autowired
+    LandMapper landMapper;
     @Autowired
     LandRepository landRepository;
     @Autowired
@@ -19,41 +25,41 @@ public class LandServiceImpl implements LandService {
 
 
     @Override
-    public Land createLand(long ownerId, Land land) {
+    public LandDTO createLand(long ownerId, Land land) {
         Owner owner = ownerService.getSingleOwner(ownerId);
         land.setOwner(owner);
         landRepository.save(land);
         owner.setLandList(List.of(land));
         ownerService.saveOwner(owner.getUser().getUserId());
-        return land;
+        return landMapper.modelLandTODto(land);
     }
 
     @Override
     public String deleteLand(long landId) {
-        Land land=landRepository.findById(landId).get();
+        Land land = landRepository.findById(landId).get();
         land.setDeleted(true);
         landRepository.save(land);
-        return "land of Id "+ landId +" is deleted successfully";
+        return "land of Id " + landId + " is deleted successfully";
     }
 
     @Override
-    public Land updateLand(long landId, Land land) {
-        Land lnd=landRepository.findById(landId).get();
+    public LandDTO updateLand(long landId, Land land) {
+        Land lnd = landRepository.findById(landId).get();
         lnd.setLandArea(land.getLandArea());
         lnd.setLandPrice(land.getLandPrice());
         lnd.setLandLocation(land.getLandLocation());
         lnd.setOwner(land.getOwner());
         ownerService.updateOwner(land.getOwner().getOwnerId(), land.getOwner());
-        return landRepository.save(lnd);
+        return landMapper.modelLandTODto(landRepository.save(lnd));
     }
 
     @Override
-    public Land getLand(long landId) {
-        return landRepository.findById(landId).get();
+    public LandDTO getLand(long landId) {
+        return landMapper.modelLandTODto(landRepository.findById(landId).get());
     }
 
     @Override
-    public List<Land> getAllLand() {
-        return landRepository.findAll();
+    public List<LandDTO> getAllLand() {
+        return landMapper.landDtoList(landRepository.findAll());
     }
 }

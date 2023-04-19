@@ -1,5 +1,6 @@
 package com.landproject.controller;
 
+import com.landproject.model.DTO.UserDTO;
 import com.landproject.model.User;
 import com.landproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

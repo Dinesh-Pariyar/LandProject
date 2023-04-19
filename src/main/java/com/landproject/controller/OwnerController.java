@@ -28,7 +28,7 @@ public class OwnerController {
 
     @GetMapping("/owner/{ownerId}")
     public ResponseEntity<?> getOwner(@PathVariable Long ownerId){
-        return new ResponseEntity<>(ownerService.getSingleOwner(ownerId),HttpStatus.OK);
+        return new ResponseEntity<>(ownerService.getSingleOwnerDTO(ownerId),HttpStatus.OK);
     }
 
     @GetMapping("/allOwners")

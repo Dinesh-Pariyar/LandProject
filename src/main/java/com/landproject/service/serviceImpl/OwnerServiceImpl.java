@@ -1,5 +1,7 @@
 package com.landproject.service.serviceImpl;
 
+import com.landproject.mapper.OwnerMapper;
+import com.landproject.model.DTO.OwnerDTO;
 import com.landproject.model.Owner;
 import com.landproject.model.User;
 import com.landproject.repository.OwnerRepository;
@@ -12,25 +14,28 @@ import java.util.List;
 
 @Service
 public class OwnerServiceImpl implements OwnerService {
+
+    @Autowired
+    OwnerMapper ownerMapper;
     @Autowired
     OwnerRepository ownerRepository;
     @Autowired
     UserService userService;
 
     @Override
-    public Owner saveOwner(Long userId) {
-        Owner owner = new Owner();
+    public OwnerDTO saveOwner(Long userId) {
+        OwnerDTO owner = new OwnerDTO();
         owner.setUser(userService.getUser(userId));
-        return ownerRepository.save(owner);
+        return ownerMapper.modelOwnerToDto(ownerRepository.save(ownerMapper.OwnerDtoToModel(owner)));
     }
 
     @Override
-    public Owner updateOwner(Long ownerId,Owner owner) {
-        Owner owner1=ownerRepository.findById(ownerId).get();
-        User user  =(owner.getUser());
+    public OwnerDTO updateOwner(Long ownerId, Owner owner) {
+        Owner owner1 = ownerRepository.findById(ownerId).get();
+        User user = (owner.getUser());
         userService.updateUser(user.getUserId(), user);
         owner1.setUser(user);
-        return ownerRepository.save(owner1);
+        return ownerMapper.modelOwnerToDto(ownerRepository.save(owner1));
     }
 
     @Override
@@ -39,12 +44,18 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
+    public OwnerDTO getSingleOwnerDTO(Long ownerId) {
+        return ownerMapper.modelOwnerToDto(ownerRepository.findById(ownerId).get());
+    }
+
+    @Override
     public Owner getSingleOwner(Long ownerId) {
         return ownerRepository.findById(ownerId).get();
     }
 
+
     @Override
-    public List<Owner> getAllOwner() {
-        return ownerRepository.findAll();
+    public List<OwnerDTO> getAllOwner() {
+        return ownerMapper.listModelOwnerDto(ownerRepository.findAll());
     }
 }

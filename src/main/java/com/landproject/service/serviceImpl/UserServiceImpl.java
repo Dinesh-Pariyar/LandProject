@@ -1,5 +1,7 @@
 package com.landproject.service.serviceImpl;
 
+import com.landproject.mapper.UserMapper;
+import com.landproject.model.DTO.UserDTO;
 import com.landproject.model.Investor;
 import com.landproject.model.User;
 import com.landproject.repository.InvestorRepository;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserMapper userMapper;
     @Autowired
     InvestorRepository investorRepository;
     final UserRepository userRepository;
@@ -21,21 +26,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addUser(User user) {
+    public UserDTO addUser(User user) {
         Investor investor = new Investor();
         investor.setUser(user);
         investorRepository.save(investor);
         userRepository.save(user);
-        return user;
+        return userMapper.modelUserToDto(user);
     }
 
     @Override
-    public User updateUser(long id, User user) {
+    public UserDTO updateUser(long id, User user) {
         User usr = userRepository.findById(id).get();
         usr.setUserName(user.getUserName());
         usr.setUserEmail(user.getUserEmail());
         usr.setUserPassword(user.getUserPassword());
-        return userRepository.save(usr);
+        userRepository.save(usr);
+        return userMapper.modelUserToDto(usr);
     }
 
     @Override
@@ -47,12 +53,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(long id) {
-        return userRepository.findById(id).get();
+    public UserDTO getUser(long id) {
+        return userMapper.modelUserToDto(userRepository.findById(id).get());
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userMapper.modelListToDtoList(userRepository.findAll());
     }
 }

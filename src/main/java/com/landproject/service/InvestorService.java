@@ -1,11 +1,12 @@
 package com.landproject.service;
 
+import com.landproject.model.DTO.InvestorDTO;
 import com.landproject.model.Investor;
 import java.util.List;
 
 public interface InvestorService {
 
-    Investor updateInvestor(Long invId,Investor investor);
-    Investor getsingleInvestor(long invId);
-    List<Investor> getAllInvestor();
+    InvestorDTO updateInvestor(Long invId, Investor investor);
+    InvestorDTO getsingleInvestor(long invId);
+    List<InvestorDTO> getAllInvestor();
 }
