@@ -21,6 +21,5 @@ public interface OwnerMapper {
     @Mapping(target = "owner", ignore = true) //target=Land Ma vayeko field ko naam.that is responsible  to bring stack over flow.
     LandDTO landToLandDto(Land land);
 
-
 //    List<LandDTO> listOfLandDto(List<Land> landList);
 }

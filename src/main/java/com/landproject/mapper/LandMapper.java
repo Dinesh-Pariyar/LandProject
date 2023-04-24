@@ -17,8 +17,8 @@ public interface LandMapper {
     LandDTO landDtoToModel(LandDTO landDTO);
     List<LandDTO> landDtoList(List<Land> landList);
 
-    @Named("blockLand")
-    @Mapping(target = "landList",ignore = true)
-    OwnerDTO ownerToOwnerDto(Owner owner);
+    @Named("blockLand")                         // jati bela owner field vetxa teti bela block land ma ja vanxa ani
+    @Mapping(target = "landList",ignore = true) // jaba owner lai owner dto ma convert garda land list lai ignore gar
+    OwnerDTO ownerToOwnerDto(Owner owner);      // vaneko ho.
 
 }

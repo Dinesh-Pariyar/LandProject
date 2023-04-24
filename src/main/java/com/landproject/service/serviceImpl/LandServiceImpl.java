@@ -2,7 +2,6 @@ package com.landproject.service.serviceImpl;
 
 import com.landproject.mapper.LandMapper;
 import com.landproject.model.DTO.LandDTO;
-import com.landproject.model.DTO.OwnerDTO;
 import com.landproject.model.Land;
 import com.landproject.model.Owner;
 import com.landproject.repository.LandRepository;
@@ -45,7 +44,7 @@ public class LandServiceImpl implements LandService {
     @Override
     public LandDTO updateLand(long landId, Land land) {
         Land lnd = landRepository.findById(landId).get();
-        lnd.setLandArea(land.getLandArea());
+        lnd.setTotalBrick(land.getTotalBrick());
         lnd.setLandPrice(land.getLandPrice());
         lnd.setLandLocation(land.getLandLocation());
         lnd.setOwner(land.getOwner());

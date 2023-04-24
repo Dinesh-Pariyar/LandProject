@@ -2,7 +2,6 @@ package com.landproject.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ public class Land {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long landId;
-    private float landArea;
+    private float totalBrick;
     private double landPrice;
     private String landLocation;
     private boolean isDeleted=Boolean.FALSE;
@@ -28,7 +27,7 @@ public class Land {
     public String toString() {
         return "Land{" +
                 "landId=" + landId +
-                ", landArea=" + landArea +
+                ", totalBrick=" + totalBrick +
                 ", landPrice=" + landPrice +
                 ", landLocation='" + landLocation + '\'' +
                 ", isDeleted=" + isDeleted +

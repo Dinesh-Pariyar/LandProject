@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 public class LandDTO {
     private long landId;
 
-    private float landArea;
+    private float totalBrick;
 
     private double landPrice;
 

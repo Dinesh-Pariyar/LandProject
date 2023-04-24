@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class OwnerController {
     @Autowired
-    UserService userService;
-    @Autowired
-    OwnerService ownerService;
+    private OwnerService ownerService;
 
     @PostMapping("/owner/{userId}")
     public ResponseEntity<?> createOwner(@PathVariable Long userId){
@@ -23,7 +21,6 @@ public class OwnerController {
     @PutMapping("/owner/{ownerId}")
     public ResponseEntity<?> updateOwner(@PathVariable Long ownerId, @RequestBody Owner owner){
         return  new ResponseEntity<>(ownerService.updateOwner(ownerId,owner),HttpStatus.OK);
-
     }
 
     @GetMapping("/owner/{ownerId}")
@@ -35,6 +32,7 @@ public class OwnerController {
     public ResponseEntity<?> getAllOwner(){
         return new ResponseEntity<>(ownerService.getAllOwner(),HttpStatus.OK);
     }
+
 
 
 }
